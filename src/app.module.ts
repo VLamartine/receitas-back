@@ -6,6 +6,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import typeorm from './config/typeorm';
 import { DataSourceOptions } from 'typeorm';
+import { AuthModule } from '@modules/auth/auth.module';
+import { UniqueConstraint } from '@utils/validators/unique/unique';
 
 @Module({
   imports: [
@@ -17,22 +19,13 @@ import { DataSourceOptions } from 'typeorm';
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: (configService: ConfigService) =>
-        configService.getOrThrow<DataSourceOptions>('typeorm'),
+      useFactory: (configService: ConfigService) => {
+        return configService.getOrThrow<DataSourceOptions>('typeorm');
+      },
     }),
-    // TypeOrmModule.forRoot({
-    //   type: dataSourceOptions.type, // Specify the database type
-    //   host: dataSourceOptions.host, // Get variable from .env here,
-    //   port: dataSourceOptions.port,
-    //   username: dataSourceOptions.username,
-    //   password: dataSourceOptions.password,
-    //   database: dataSourceOptions.database,
-    //   synchronize: dataSourceOptions.synchronize, // Note: only for development
-    //   migrations: dataSourceOptions.migrations,
-    //   autoLoadEntities: true
-    // })
+    AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, UniqueConstraint],
 })
 export class AppModule {}

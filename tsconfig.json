@@ -30,6 +30,9 @@
       ],
       "@config/*": [
         "./src/config/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
       ]
     }
   }
