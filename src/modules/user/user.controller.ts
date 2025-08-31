@@ -11,17 +11,26 @@ import {
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { AuthService } from '@modules/auth/auth.service';
 
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private authService: AuthService
+  ) {}
 
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
+  async create(@Body() createUserDto: CreateUserDto) {
     if (createUserDto.password !== createUserDto.confirmPassword) {
       throw new UnprocessableEntityException('Passwords do not match');
     }
-    return this.userService.create(createUserDto);
+    const user = await this.userService.create(createUserDto);
+    const auth = await this.authService.login(user);
+    return {
+      ...user,
+      ...auth,
+    };
   }
 
   @Get()
