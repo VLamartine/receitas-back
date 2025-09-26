@@ -8,6 +8,9 @@ import typeorm from './config/typeorm';
 import { DataSourceOptions } from 'typeorm';
 import { AuthModule } from '@modules/auth/auth.module';
 import { UniqueConstraint } from '@utils/validators/unique/unique';
+import { ProductModule } from './modules/product/product.module';
+import { ShoppingListModule } from './modules/shopping-list/shopping-list.module';
+import { UnitsModule } from './modules/units/units.module';
 
 @Module({
   imports: [
@@ -24,6 +27,9 @@ import { UniqueConstraint } from '@utils/validators/unique/unique';
       },
     }),
     AuthModule,
+    ProductModule,
+    ShoppingListModule,
+    UnitsModule,
   ],
   controllers: [AppController],
   providers: [AppService, UniqueConstraint],

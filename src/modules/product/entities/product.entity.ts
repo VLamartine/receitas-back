@@ -6,23 +6,18 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Exclude } from 'class-transformer';
-import { ShoppingList } from '@modules/shopping-list/entities/shopping-list.entity';
+import { ShoppingListItem } from '@entities/shopping-list-item.entity/shopping-list.item.entity';
 
 @Entity()
-export class User {
+export class Product {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
   name: string;
 
-  @Column({ unique: true })
-  email: string;
-
-  @Column()
-  @Exclude()
-  password: string;
+  @Column({ nullable: true })
+  image: string;
 
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
@@ -34,10 +29,9 @@ export class User {
   })
   updatedAt: Date;
 
-  @OneToMany(() => ShoppingList, shoppingList => shoppingList.user)
-  shoppingLists: ShoppingList[];
-
-  constructor(partial: Partial<User>) {
-    Object.assign(this, partial);
-  }
+  @OneToMany(
+    () => ShoppingListItem,
+    (shoppingListItem: ShoppingListItem) => shoppingListItem.product
+  )
+  shoppingListItems: ShoppingListItem[];
 }

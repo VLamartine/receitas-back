@@ -1,0 +1,2 @@
+- [ ] Criar Interface Padrão para Endpoints
+- [ ]

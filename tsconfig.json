@@ -22,6 +22,9 @@
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
+      "@src/*": [
+        "./src"
+      ],
       "@database/*": [
         "./src/database/*"
       ],
@@ -33,7 +36,15 @@
       ],
       "@utils/*": [
         "./src/utils/*"
+      ],
+      "@entities/*": [
+        "./src/entities/*"
       ]
     }
+  },
+  "ts-node": {
+    "require": [
+      "tsconfig-paths/register"
+    ]
   }
 }
