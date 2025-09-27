@@ -1,0 +1,2 @@
+### Get All
+GET http://localhost:3000/units
