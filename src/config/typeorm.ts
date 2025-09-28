@@ -17,15 +17,17 @@ const config: DataSourceOptions & SeederOptions = {
   username: db.username,
   password: db.password,
   database: db.database,
-  entities: [`${__dirname}/..//**/*.entity{.ts,.js}`],
+  entities: [`${__dirname}/../**/*.entity{.ts,.js}`],
   migrations: [`${__dirname}/../database/migrations/*{.ts,.js}`],
   synchronize: false,
   seeds: [`${__dirname}/../database/seeds/*{.ts,.js}`],
+  seedTracking: false,
+  logging: ["query", "error"],
 };
 
 console.log(config);
-export default registerAs('typeorm', () => ({
+export const typeOrmConfig = registerAs('typeorm', () => ({
   ...config,
   autoLoadEntities: true,
 }));
-export const connectionSource = new DataSource(config);
+export default new DataSource(config);

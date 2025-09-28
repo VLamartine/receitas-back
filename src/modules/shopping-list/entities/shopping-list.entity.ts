@@ -18,10 +18,10 @@ export class ShoppingList {
   @Column()
   name: string;
 
-  @Column()
+  @Column({nullable: true})
   description: string;
 
-  @Column()
+  @Column({nullable: true, default: null})
   purchaseDate: Date;
 
   @Column()
@@ -39,7 +39,8 @@ export class ShoppingList {
 
   @OneToMany(
     () => ShoppingListItem,
-    (shoppingListItem: ShoppingListItem) => shoppingListItem.shoppingList
+    (shoppingListItem: ShoppingListItem) => shoppingListItem.shoppingList,
+    {cascade: true}
   )
   shoppingListItems: ShoppingListItem[];
 

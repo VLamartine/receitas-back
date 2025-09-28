@@ -25,7 +25,9 @@
     "migration:create": "npm run typeorm -- migration:create ./src/database/migrations/$npm_config_name",
     "migration:revert": "npm run typeorm -- -d ./src/config/typeorm.ts migration:revert",
     "seed:script": "SEEDING=true ts-node ./src/scripts/seed.ts",
-    "seed": "ts-node ./node_modules/typeorm-extension/bin/cli.cjs seed:run -d ./src/config/typeorm.ts"
+    "seed": "tsx ./node_modules/typeorm-extension/bin/cli.cjs seed:run -d ./src/config/typeorm.ts",
+    "db:drop": "tsx ./node_modules/typeorm-extension/bin/cli.cjs db:drop -d ./src/config/typeorm.ts --initialDatabase postgres",
+    "db:create": "tsx ./node_modules/typeorm-extension/bin/cli.cjs db:create  -d ./src/config/typeorm.ts --initialDatabase postgres"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
@@ -73,6 +75,7 @@
     "ts-loader": "^9.5.2",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.20.6",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.20.0"
   },

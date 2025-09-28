@@ -24,6 +24,9 @@ export class ShoppingListItem {
   @Column()
   quantity: number;
 
+  @Column()
+  unitId: string;
+
   @ManyToOne(() => Unit)
   unit: Unit;
 

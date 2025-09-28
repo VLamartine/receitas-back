@@ -14,7 +14,7 @@ if (
   !DATABASE_USERNAME ||
   !DATABASE_PASSWORD
 ) {
-  throw new Error('Missing database configuration');
+  throw new Error('Banco de dados não configurado. Cheque o arquivo .env\n');
 }
 
 export default registerAs('database', () => ({
