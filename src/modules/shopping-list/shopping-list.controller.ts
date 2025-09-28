@@ -26,7 +26,7 @@ export class ShoppingListController {
     @Req() req: Request,
     @Body() createShoppingListDto: CreateShoppingListDto
   ): Promise<ShoppingList> {
-    createShoppingListDto.userId = req.user.userId;
+    // createShoppingListDto.userId = req.user.userId;
     return this.shoppingListService.create(createShoppingListDto);
   }
 
