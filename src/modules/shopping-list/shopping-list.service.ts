@@ -1,29 +1,29 @@
 import { Injectable } from '@nestjs/common';
 import { CreateShoppingListDto } from './dto/create-shopping-list.dto';
 import { UpdateShoppingListDto } from './dto/update-shopping-list.dto';
-import { InjectRepository } from "@nestjs/typeorm";
-import { ShoppingList } from "@modules/shopping-list/entities/shopping-list.entity";
-import { Repository } from "typeorm";
+import { InjectRepository } from '@nestjs/typeorm';
+import { ShoppingList } from '@modules/shopping-list/entities/shopping-list.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class ShoppingListService {
-  constructor(@InjectRepository(ShoppingList) private readonly repository: Repository<ShoppingList>) {
-  }
+  constructor(
+    @InjectRepository(ShoppingList)
+    private readonly repository: Repository<ShoppingList>
+  ) {}
   async create(createShoppingListDto: CreateShoppingListDto) {
     const shoppingListEntity = this.repository.create({
       name: createShoppingListDto.name,
       description: createShoppingListDto.description,
       purchaseDate: createShoppingListDto.purchaseDate,
       userId: createShoppingListDto.userId,
-      // Map the DTO items to entity items with proper structure
       shoppingListItems: createShoppingListDto.shoppingListItems?.map(item => ({
         quantity: item.quantity,
-        // Map the unit ID appropriately based on your entity structure
-        unitId: item.unit, // Assuming 'unit' field contains the unit ID
-        // Set other required fields as needed
-        productId: item.id, // Assuming 'id' field contains the product ID
-      }))
+        unitId: item.unit,
+        productId: item.productId,
+      })),
     });
+
     return this.repository.save(shoppingListEntity);
   }
 

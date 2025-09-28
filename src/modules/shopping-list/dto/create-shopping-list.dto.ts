@@ -2,9 +2,9 @@ import { IsArray, IsDate, IsNotEmpty, IsNumber, IsOptional, IsString, IsUUID, Va
 import { Type } from "class-transformer";
 
 export class CreateShoppingListItemDto {
-  @IsOptional()
+  @IsNotEmpty()
   @IsUUID()
-  id?: string;
+  productId?: string;
 
   @IsNotEmpty()
   @IsString()

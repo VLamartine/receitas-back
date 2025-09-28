@@ -11,13 +11,13 @@ Content-Type:application/json
   "name": "Lista de Compras do Bolo de Laranja",
   "shoppingListItems": [
     {
-      "id": "26231153-f927-4c39-bf66-4eb53067914c",
+      "productId": "26231153-f927-4c39-bf66-4eb53067914c",
       "name": "Ovo",
       "quantity": 4,
       "unit": "2f5dc964-b60e-4e1c-a362-1f9fb0546213"
     },
     {
-      "id": "3afb5e5b-c195-47a8-a307-531ec60d2417",
+      "productId": "3afb5e5b-c195-47a8-a307-531ec60d2417",
       "name": "Leite",
       "quantity": 8,
       "unit": "735364be-21a7-4e70-8e7d-4da2b80f3ad1"

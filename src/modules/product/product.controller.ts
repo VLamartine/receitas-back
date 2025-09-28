@@ -25,7 +25,6 @@ export class ProductController {
 
   @Get()
   findAll(@Query() query: Record<string, any>) {
-    console.log(query);
     return this.productService.findAll(query);
   }
 
