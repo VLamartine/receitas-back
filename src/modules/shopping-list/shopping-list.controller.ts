@@ -13,7 +13,6 @@ import { ShoppingListService } from './shopping-list.service';
 import { CreateShoppingListDto } from './dto/create-shopping-list.dto';
 import { UpdateShoppingListDto } from './dto/update-shopping-list.dto';
 import { JwtAuthGuard } from '@modules/auth/jwt-auth.guard';
-import Request from 'express';
 import { ShoppingList } from './entities/shopping-list.entity';
 
 @Controller('shopping-list')
@@ -23,10 +22,10 @@ export class ShoppingListController {
 
   @Post()
   create(
-    @Req() req: Request,
+    @Req() req: any,
     @Body() createShoppingListDto: CreateShoppingListDto
   ): Promise<ShoppingList> {
-    // createShoppingListDto.userId = req.user.userId;
+    createShoppingListDto.userId = req.user.userId;
     return this.shoppingListService.create(createShoppingListDto);
   }
 
